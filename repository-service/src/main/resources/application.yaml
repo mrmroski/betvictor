@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: betvictor-repository-application
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.value.default.type: com.recruitment.task.service.kafka.ProcessedTextEvent
+        spring.json.trusted.packages: com.recruitment.task.service.kafka
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: false
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/postgres"
+    username: postgres
+    password: password
+  liquibase:
+    change-log: classpath:/changelog/changelog.xml
+    default-schema: public
+
+server:
+  port: 8081
+
+application:
+  variables:
+    history-length: 10
+  kafka:
+    concurrency: 1

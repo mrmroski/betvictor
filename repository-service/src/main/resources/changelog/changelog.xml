@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="Patryk Mirowski">
+        <createTable tableName="processed_text">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="creation_date" type="TIMESTAMPTZ">
+                <constraints nullable="false"/>
+            </column>
+            <column name="most_frequent_word" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="avg_paragraph_size" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="avg_paragraph_processing_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_processing_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <sql>
+            CREATE INDEX ix_processed_text_creation_date ON processed_text (creation_date DESC);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
